@@ -1,0 +1,79 @@
+{
+  "name": "csgo-rcon-tools",
+  "version": "1.0.0",
+  "description": "Electron application for connecting to and managing CS:GO servers via RCON",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "build:css": "npx tailwindcss -i ./src/renderer/tailwind.css -o ./src/renderer/styles.css --watch",
+    "dev": "concurrently \"npx tailwindcss -i ./src/renderer/tailwind.css -o ./src/renderer/styles.css --watch\" \"electron .\"",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "build:all": "electron-builder -mwl"
+  },
+  "keywords": [
+    "rcon",
+    "electron",
+    "csgo",
+    "counter-strike",
+    "game-server",
+    "server-management"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "rcon": "^1.1.0",
+    "rcon-client": "^4.2.5"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.2",
+    "electron": "^35.1.4",
+    "electron-builder": "^26.0.12",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.3"
+  },
+  "build": {
+    "appId": "com.csgo.rcontools",
+    "productName": "CS:GO RCON Tools",
+    "files": [
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "resources",
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "icon": "resources/icon.ico"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "resources/icon.icns",
+      "category": "public.app-category.developer-tools"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm",
+        "zip"
+      ],
+      "icon": "resources/icon.png",
+      "category": "Utility"
+    }
+  }
+}

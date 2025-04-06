@@ -1,0 +1,818 @@
+:root {
+  /* Primary gradient colors */
+  --primary-gradient-from: #4f46e5;
+  --primary-gradient-to: #7c3aed;
+
+  /* Secondary accent colors */
+  --accent-color: #f59e0b;
+  --accent-dark: #d97706;
+
+  /* UI control colors */
+  --error-color: #ef4444;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+
+  /* CS:GO specific colors */
+  --csgo-gradient-from: #ea580c;
+  --csgo-gradient-to: #b91c1c;
+
+  /* Light theme */
+  --light-bg: #f9fafb;
+  --light-surface: #ffffff;
+  --light-border: #e5e7eb;
+  --light-text: #111827;
+  --light-text-secondary: #4b5563;
+  --light-input-bg: #f3f4f6;
+  --light-hover: rgba(0, 0, 0, 0.05);
+  --light-card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --light-header-bg: linear-gradient(
+    to right,
+    var(--primary-gradient-from),
+    var(--primary-gradient-to)
+  );
+
+  /* Dark theme */
+  --dark-bg: #111827;
+  --dark-surface: #1f2937;
+  --dark-surface-secondary: #374151;
+  --dark-border: #374151;
+  --dark-text: #f9fafb;
+  --dark-text-secondary: #d1d5db;
+  --dark-input-bg: #374151;
+  --dark-hover: rgba(255, 255, 255, 0.1);
+  --dark-card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
+    0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  --dark-header-bg: linear-gradient(to right, #1e293b, #0f172a);
+
+  /* Console */
+  --console-bg: #1e293b;
+  --console-text: #e2e8f0;
+}
+
+/* Light theme variables */
+:root:not(.dark) {
+  --bg-color: var(--light-bg);
+  --surface-color: var(--light-surface);
+  --border-color: var(--light-border);
+  --text-color: var(--light-text);
+  --text-secondary: var(--light-text-secondary);
+  --input-bg: var(--light-input-bg);
+  --hover-bg: var(--light-hover);
+  --card-shadow: var(--light-card-shadow);
+  --header-bg: var(--light-header-bg);
+}
+
+/* Dark theme variables */
+.dark {
+  --bg-color: var(--dark-bg);
+  --surface-color: var(--dark-surface);
+  --surface-secondary: var(--dark-surface-secondary);
+  --border-color: var(--dark-border);
+  --text-color: var(--dark-text);
+  --text-secondary: var(--dark-text-secondary);
+  --input-bg: var(--dark-input-bg);
+  --hover-bg: var(--dark-hover);
+  --card-shadow: var(--dark-card-shadow);
+  --header-bg: var(--dark-header-bg);
+}
+
+/* Global reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base styles */
+body {
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Layout */
+.container {
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+/* Header & Navigation */
+header {
+  background: var(--header-bg);
+  color: white;
+  padding: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+h1 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: var(--text-color);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.625rem;
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.75rem;
+  color: var(--text-color);
+  letter-spacing: -0.025em;
+}
+
+h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+  color: var(--text-color);
+  letter-spacing: -0.025em;
+}
+
+/* Grid Layout */
+.grid {
+  display: grid;
+  gap: 24px;
+}
+
+.grid-cols-1 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 992px) {
+  .lg\\:grid-cols-4 {
+    grid-template-columns: 1fr 3fr;
+  }
+
+  .lg\\:col-span-1 {
+    grid-column: span 1;
+  }
+
+  .lg\\:col-span-3 {
+    grid-column: span 3;
+  }
+}
+
+/* Card styling */
+.card {
+  background-color: var(--surface-color);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.02);
+  position: relative;
+  min-height: 65px;
+}
+
+.dark .card-header {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.card-body {
+  padding: 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form elements */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-gradient-from);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.dark input:focus {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+/* Button styles */
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Command buttons (common commands) */
+.btn-secondary {
+  background-color: #3b82f6;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3),
+    0 0 0 1px rgba(59, 130, 246, 0.1) inset;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.btn-secondary:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px -1px rgba(59, 130, 246, 0.4),
+    0 0 0 1px rgba(59, 130, 246, 0.2) inset;
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* Primary action buttons */
+.btn-primary {
+  background-color: #8b5cf6;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.3),
+    0 0 0 1px rgba(139, 92, 246, 0.1) inset;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: #7c3aed;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px -1px rgba(139, 92, 246, 0.4),
+    0 0 0 1px rgba(139, 92, 246, 0.2) inset;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Danger buttons */
+.btn-danger {
+  background-color: #ef4444;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.3),
+    0 0 0 1px rgba(239, 68, 68, 0.1) inset;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px -1px rgba(239, 68, 68, 0.4),
+    0 0 0 1px rgba(239, 68, 68, 0.2) inset;
+}
+
+.btn-danger:active {
+  transform: translateY(0);
+}
+
+/* CS:GO specific buttons */
+.btn-csgo {
+  background-color: #f97316;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.3),
+    0 0 0 1px rgba(249, 115, 22, 0.1) inset;
+  border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+.btn-csgo:hover {
+  background-color: #ea580c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px -1px rgba(249, 115, 22, 0.4),
+    0 0 0 1px rgba(249, 115, 22, 0.2) inset;
+}
+
+.btn-csgo:active {
+  transform: translateY(0);
+}
+
+/* Disabled buttons */
+.btn:disabled,
+.btn-primary:disabled,
+.btn-danger:disabled,
+.btn-secondary:disabled,
+.btn-csgo:disabled {
+  background-color: #cbd5e1;
+  color: #94a3b8;
+  border-color: #e2e8f0;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 1;
+  text-shadow: none;
+}
+
+/* Flex utilities */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.space-x-3 > * + * {
+  margin-left: 0.75rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.25rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+/* Status indicator */
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  width: 140px;
+  justify-content: center;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.status:before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.connected {
+  background-color: #10b981;
+  color: white;
+}
+
+.connected:before {
+  background-color: #ecfdf5;
+  box-shadow: 0 0 0 2px #059669;
+}
+
+.disconnected {
+  background-color: #ef4444;
+  color: white;
+}
+
+.disconnected:before {
+  background-color: #fef2f2;
+  box-shadow: 0 0 0 2px #b91c1c;
+}
+
+/* Console styles */
+.console-container {
+  margin-bottom: 20px;
+  flex-grow: 1;
+  position: relative;
+}
+
+.console {
+  height: 320px;
+  background-color: var(--console-bg);
+  color: var(--console-text);
+  border-radius: 8px;
+  padding: 16px;
+  font-family: "JetBrains Mono", "Cascadia Code", "Courier New", monospace;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Command buttons layout */
+.command-section {
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.command-section.common {
+  background-color: rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.command-section.csgo {
+  background-color: rgba(249, 115, 22, 0.05);
+  border: 1px solid rgba(249, 115, 22, 0.1);
+}
+
+/* Command group styles */
+.command-group {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(249, 115, 22, 0.15);
+}
+
+.dark .command-group {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.command-group-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #ea580c;
+  padding-bottom: 0.375rem;
+  border-bottom: 1px solid rgba(249, 115, 22, 0.15);
+}
+
+.dark .command-group-title {
+  color: #fb923c;
+}
+
+.command-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .command-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.command-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .command-buttons.cmd-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .command-buttons.cmd-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .command-buttons.cmd-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Map changer styling */
+.map-changer {
+  padding: 0.75rem;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(249, 115, 22, 0.15);
+}
+
+.dark .map-changer {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.gap-2 {
+  gap: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+/* Border utilities */
+.border-t {
+  border-top: 1px solid var(--border-color);
+}
+
+.pt-4 {
+  padding-top: 1.25rem;
+}
+
+/* Map selector */
+.map-select-container {
+  display: flex;
+  gap: 12px;
+}
+
+select {
+  flex-grow: 1;
+  padding: 12px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  font-size: 0.95rem;
+  font-weight: 500;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--primary-gradient-from);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+select:disabled {
+  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+.dark select:disabled {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Recent connections */
+#recent-list {
+  list-style: none;
+  margin-top: 12px;
+}
+
+#recent-list li {
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+#recent-list li:hover {
+  background-color: var(--hover-bg);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+#recent-list li:active {
+  transform: translateY(0);
+}
+
+/* Rounded corners */
+.rounded-r-none {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.rounded-l-none {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Console log entries */
+.log-entry {
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(75, 85, 99, 0.2);
+  padding-bottom: 8px;
+}
+
+.log-time {
+  opacity: 0.75;
+  font-size: 0.75rem;
+  margin-right: 6px;
+  color: #94a3b8;
+}
+
+.log-command {
+  color: #f59e0b;
+}
+
+.log-response {
+  color: #10b981;
+}
+
+.log-error {
+  color: #ef4444;
+}
+
+.log-info {
+  color: #3b82f6;
+}
+
+.log-success {
+  color: #10b981;
+}
+
+/* Notifications */
+.notification {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 100;
+  transform: translateY(10px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notification.error {
+  background: linear-gradient(to right, #ef4444, #b91c1c);
+}
+
+.notification.success {
+  background: linear-gradient(to right, #10b981, #059669);
+}
+
+.notification.warning {
+  background: linear-gradient(to right, #f59e0b, #d97706);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+.dark .theme-toggle {
+  background: #2d3748;
+}
+
+.theme-toggle svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #4b5563;
+  transition: transform 0.5s;
+}
+
+.theme-toggle:hover svg {
+  transform: rotate(15deg);
+}
+
+.dark .theme-toggle svg {
+  color: #e5e7eb;
+}
+
+.hidden {
+  display: none;
+}
+
+.dark .dark\\:block {
+  display: block;
+}
+
+.dark .dark\\:hidden {
+  display: none;
+}
+
+/* Command input field */
+.command-input-container {
+  display: flex;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.command-input-container input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+
+.command-input-container button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Section title with gradient text */
+.gradient-text {
+  background: linear-gradient(
+    to right,
+    var(--primary-gradient-from),
+    var(--primary-gradient-to)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+.csgo-gradient-text {
+  background: linear-gradient(
+    to right,
+    var(--csgo-gradient-from),
+    var(--csgo-gradient-to)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
